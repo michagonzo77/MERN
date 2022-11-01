@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+  background-color: #DDDDDD;
+  padding: 1%;
+}
+
+.App-header {
+  margin: 0 auto;
+  background-color: #6AA84F;
+  min-height: 20vh;
+  width: 96%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Navigation {
+  background-color: #6FA8DC;
+  min-height: 65vh;
+  min-width: 30vw;
+  margin-left: 2%;
+  margin-top: 3%;
+}
+
+.Bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Main {
+  background-color: #E06666;
+  min-height: 65vh;
+  margin-top: 3%;
+  margin-right: 2%;
+  padding: 10px;
+}
+
+.SubContentsFlex {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  max-width: 56vw;
+}
+
+.SubContents {
+  background-color: #FFD966;
+  width: 18vw;
+  height: 40vh;
+}
+
+.Advertisement {
+  background-color: #B4A7D6;
+  height: 15vh;
+  width: 56vw;
+  margin-top: 50px;
+}

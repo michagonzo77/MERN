@@ -1,0 +1,30 @@
+.Main {
+  text-align: center;
+}
+.Display {
+  margin: 0 auto;
+}
+.tabs {
+  margin: 0 auto;
+}
+
+@keyframes TabWrapper-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.btn-group {
+  width: 80px;
+  height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

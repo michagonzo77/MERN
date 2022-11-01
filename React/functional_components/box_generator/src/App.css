@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.boxy {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.boxy1 {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}
+
+.boxy2 {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+.boxy3 {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  background-color: green;
+}
+
+.boxSection {
+  margin-top: 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
