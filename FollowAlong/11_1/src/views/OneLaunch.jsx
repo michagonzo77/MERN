@@ -42,9 +42,10 @@ export const OneLaunch = (props) => {
         <h4>Details:</h4>
         <p>{details}</p>
         {
-            originalImageUrls.map((url) => {
+            originalImageUrls.map((url, i) => {
                 return(
                     <img
+                        key={i}
                         className="shadow-img rounded mb-md"
                         src={url}
                         alt="Launch"
@@ -60,7 +61,7 @@ export const OneLaunch = (props) => {
                     src={article}
                     width="90%"
                     height="800px"
-                    allowfullscreen=""
+                    allowFullScreen=""
                     loading="lazy"
                 />
             )
