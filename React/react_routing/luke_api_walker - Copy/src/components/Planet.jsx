@@ -5,7 +5,7 @@ export const Planet = (props) => {
 
     return (
         <>
-            <div className="flex-col align-items-center text-center">
+            <div className="text-light flex-col align-items-center text-center">
                 <h1>{name}</h1>
                 <p><b>Climate: </b> {climate}</p>
                 <p><b>Terrain: </b> {terrain}</p>

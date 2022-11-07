@@ -37,3 +37,27 @@
 .rounded {
   border-radius: 5px;
 }
+
+.all {
+  background-color: black;
+}
+
+.cool-bg {
+  padding: 125px;
+  min-height: 1250px;
+  font-weight: 800;
+  font-size: 180px;
+  background-image: url("./components/giphy4.gif");
+  background-size: cover;
+  background-position: right;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 50%;
+  line-height: .75;
+}
+
+.black-bg {
+  /* background-color: black; */
+  width: 75%;
+  margin: 0 auto;
+}

@@ -11,7 +11,7 @@ export const Film = (props) => {
 
     return (
         <>
-            <div className="flex-col align-items-center text-center w-50 main">
+            <div className="text-light flex-col align-items-center text-center w-50 main">
                 <h1>{title}</h1>
                 <p><b>Opening Crawl: </b> {opening_crawl}</p>
                 <p><b>Director: </b> {director}</p>

@@ -42,7 +42,7 @@ export const Form = (props) => {
                     <label className="me-3">ID: </label>
                     <input type="number" name="id" placeholder={formInfo.id} onChange={handleInput}/>
                 </div>
-                <input className="btn btn-success mb-md" type="submit" value="Search" />
+                <input className="btn btn-danger mb-md" type="submit" value="Search" />
             </form>
         </div>
     );

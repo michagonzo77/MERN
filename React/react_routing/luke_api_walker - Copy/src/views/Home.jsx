@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
 import { Form } from '../components/Form'
 import { Person } from "../components/Person";
 import { Planet } from "../components/Planet";
 import { Film } from "../components/Film";
-import { Error } from "../components/Error";
+import { NotFound } from "../views/NotFound";
 import { getOneStarWars } from '../services/starwarsApiServices';
 import '../App.css';
 
@@ -14,7 +14,8 @@ export const Home = (props) => {
     const [person, setPerson] = useState(null);
     const [planet, setPlanet] = useState(null);
     const [film, setFilm] = useState(null);
-    const [error, setError] = useState(null);
+    const [notFound, setNotFound] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getOneStarWars(type, id)
@@ -22,27 +23,30 @@ export const Home = (props) => {
                 if (type === "people") {
                     setPerson(data);
                     setPlanet(null);
-                    setError(null);
+                    setFilm(null);
+                    setNotFound(null);
                 }
                 else if (type === "planets") {
                     setPlanet(data);
                     setPerson(null);
-                    setError(null);
+                    setFilm(null);
+                    setNotFound(null);
                 }
                 else if (type === "films") {
                     setFilm(data);
                     setPlanet(null);
                     setPerson(null);
-                    setError(null);
+                    setNotFound(null);
                 }
             })
             .catch(err => {
                 console.log(err.response.status);
                 if (type !== undefined && id !== undefined){
-                    setFilm(null);
-                    setPlanet(null);
-                    setPerson(null);
-                    setError("These are not the droids you are looking for")
+                    // setFilm(null);
+                    // setPlanet(null);
+                    // setPerson(null);
+                    // setNotFound("These are not the droids you are looking for")
+                    navigate("/404")
                 }
             });
     }, [type, id]);
@@ -61,7 +65,7 @@ export const Home = (props) => {
                 film && <Film film={film} />
             }
             {
-                error && <Error error={error} />
+                notFound && <NotFound notFound={notFound} />
             }
         </div>
     )
