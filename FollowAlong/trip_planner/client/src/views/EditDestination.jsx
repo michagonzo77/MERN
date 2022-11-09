@@ -1,6 +1,165 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { updateDestination, getDestinationById } from "../services/internalApiService";
+
 
 export const EditDestination = (props) => {
-    const {id} = useParams();
-    return <h2>Edit Destination id: {id}</h2>
+
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        location: '',
+        description: '',
+        src: '',
+        srcType: 'img',
+        summer: false,
+        spring: false,
+        winter: false,
+        fall: false
+    })
+    const [errors, setErrors] = useState(null)
+
+    useEffect(() => {
+        getDestinationById(id)
+            .then((data) => {
+                setFormData(data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [id])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        updateDestination(id, formData)
+            .then((data) => {
+                console.log('New Destination Data:', data)
+                navigate(`/destinations/${data._id}`)
+            })
+            .catch((error) => {
+                console.log(error.response)
+                setErrors(error.response?.data?.errors)
+            })
+    }
+
+    const handleFormChanges = (e) => {
+        if (e.target.type === "checkbox") {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.checked
+            })
+            return null;
+        }
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    }
+
+
+    if (formData === null) {
+        return null
+    }
+    const { summer, spring, winter, fall } = formData;
+
+    return (
+        <div className="w-50 p-4 rounded mx-auto shadow">
+            <h3 className="text-center">New Destination</h3>
+            <form onSubmit={(e) => {
+                handleSubmit(e);
+            }}>
+                <div className="form-group">
+                    <label className="h6">Location</label>
+                    <input
+                        onChange={handleFormChanges}
+                        type="text"
+                        name="location"
+                        value={formData.location}
+                        className="form-control"
+                    />
+                    {
+                        errors?.location && (
+                            <span className="text-danger">{errors.location?.message}</span>
+                        )
+                    }
+                </div>
+                <div className="form-group">
+                    <label className="h6">Description</label>
+                    <input
+                        onChange={handleFormChanges}
+                        type="text"
+                        name="description"
+                        value={formData.description}
+                        className="form-control"
+                    />
+                    {
+                        errors?.description && (
+                            <span className="text-danger">{errors.description?.message}</span>
+                        )
+                    }
+                </div>
+                <div className="form-group">
+                    <label className="h6">Media Url</label>
+                    <input
+                        onChange={handleFormChanges}
+                        type="text"
+                        name="src"
+                        value={formData.src}
+                        className="form-control"
+                    />
+                </div>
+                <div className="form-group mt-3">
+                    <label className="h6 me-2">Media Type</label>
+                    <select
+                        onChange={handleFormChanges}
+                        type="text"
+                        name="srcType"
+                    >
+                        <option value='img'>Image</option>
+                        <option value='Google Maps Embed'>Google Maps Embed</option>
+                        <option value='Youtube Embed'>Youtube Embed</option>
+                    </select>
+                </div>
+                <hr />
+                <h5>Travel Seasons</h5>
+                <div className="form-check">
+                    <input
+                        onChange={handleFormChanges}
+                        name="summer"
+                        type="checkbox"
+                        checked={summer}
+                    />
+                    <label className="h6 form-check-label">Summer</label>
+                </div>
+                <div className="form-check">
+                    <input
+                        onChange={handleFormChanges}
+                        name="spring"
+                        type="checkbox"
+                        checked={spring}
+                    />
+                    <label className="h6 form-check-label">Spring</label>
+                </div>
+                <div className="form-check">
+                    <input
+                        onChange={handleFormChanges}
+                        name="winter"
+                        type="checkbox"
+                        checked={winter}
+                    />
+                    <label className="h6 form-check-label">Winter</label>
+                </div>
+                <div className="form-check">
+                    <input
+                        onChange={handleFormChanges}
+                        name="fall"
+                        type="checkbox"
+                        checked={fall}
+                    />
+                    <label className="h6 form-check-label">Fall</label>
+                </div>
+                <button className="btn btn-sm btn-outline-success">Submit</button>
+            </form>
+        </div>
+    )
 }

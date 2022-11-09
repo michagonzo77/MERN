@@ -2,7 +2,8 @@ const { createJoke,
     getAllJokes,
     getJokeById,
     deleteJokeById,
-    getJokeByIdAndUpdate
+    getJokeByIdAndUpdate,
+    getRandomJoke
 } = require('../services/joke.service');
 
 
@@ -56,10 +57,21 @@ const handleUpdateJokeById = async (req, res) => {
     }
 }
 
+const handleGetRandomJoke = async (req, res) => {
+    console.log('controller: handleGetRandomJoke req.params');
+    try {
+        const joke = await getRandomJoke(req.params.id, req.body);
+        return res.json(joke)
+    } catch (error) {
+        return res.status(400).json(error);
+    }
+}
+
 module.exports = {
     handleCreateJoke,
     handleGetAllJokes,
     handleGetJokeById,
     handleDeleteJokeById,
     handleUpdateJokeById,
+    handleGetRandomJoke
 };

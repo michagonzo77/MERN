@@ -35,6 +35,12 @@ const getJokeByIdAndUpdate = async (id, data) => {
     return joke;
 }
 
+const getRandomJoke = async () => {
+    console.log("service: getRandomJoke");
+    const allJokes = await Joke.find()
+    const randomIdx = Math.floor(Math.random() * allJokes.length);
+    return allJokes[randomIdx];
+}
 
 
 module.exports = {
@@ -42,5 +48,6 @@ module.exports = {
     getAllJokes,
     getJokeById,
     deleteJokeById,
-    getJokeByIdAndUpdate
+    getJokeByIdAndUpdate,
+    getRandomJoke
 };

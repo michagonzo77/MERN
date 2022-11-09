@@ -21,34 +21,37 @@ export const NewDestination = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        for(const key in formData){
-            if(formData[key] === false){
+        for (const key in formData) {
+            if (formData[key] === false) {
                 delete formData[key]
             }
         }
         createDestination(formData)
             .then((data) => {
-                console.log('New Destination Data:' , data)
+                console.log('New Destination Data:', data)
                 navigate(`/destinations/${data._id}`)
             })
             .catch((error) => {
-                console.log(error.response)
+                console.log(error.response?.data?.errors)
+                setErrors(error.response?.data?.errors)
             })
     }
 
     const handleFormChanges = (e) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             setFormData({
                 ...formData,
-                [e.target.name] : e.target.checked
+                [e.target.name]: e.target.checked
             })
             return null;
         }
         setFormData({
             ...formData,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         });
     };
+
+
     return (
         <div className="w-50 p-4 rounded mx-auto shadow">
             <h3 className="text-center">New Destination</h3>
@@ -64,6 +67,11 @@ export const NewDestination = (props) => {
                         value={formData.location}
                         className="form-control"
                     />
+                    {
+                        errors?.location && (
+                            <span className="text-danger">{errors.location?.message}</span>
+                        )
+                    }
                 </div>
                 <div className="form-group">
                     <label className="h6">Description</label>
@@ -74,6 +82,11 @@ export const NewDestination = (props) => {
                         value={formData.description}
                         className="form-control"
                     />
+                    {
+                        errors?.description && (
+                            <span className="text-danger">{errors.description?.message}</span>
+                        )
+                    }
                 </div>
                 <div className="form-group">
                     <label className="h6">Media Url</label>
@@ -87,11 +100,11 @@ export const NewDestination = (props) => {
                 </div>
                 <div className="form-group mt-3">
                     <label className="h6 me-2">Media Type</label>
-                    <select 
+                    <select
                         onChange={handleFormChanges}
                         type="text"
                         name="srcType"
-                        >
+                    >
                         <option value='img'>Image</option>
                         <option value='Google Maps Embed'>Google Maps Embed</option>
                         <option value='Youtube Embed'>Youtube Embed</option>
