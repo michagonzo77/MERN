@@ -36,7 +36,6 @@ const getProductByIdAndUpdate = async (id, data) => {
 }
 
 
-
 module.exports = {
     createProduct: createProduct,
     getAllProducts,

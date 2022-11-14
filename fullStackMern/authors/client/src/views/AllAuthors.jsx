@@ -44,7 +44,7 @@ export const AllAuthors = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {authors.sort((a, b) => a.name > b.name ? 1 : -1).map((author, i) => {
+                    {authors.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1).map((author, i) => {
                         const { _id, name } = author;
                         return (
                                 <tr key={i}>
